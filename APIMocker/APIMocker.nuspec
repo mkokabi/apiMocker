@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/mkokabi/apiMocker</projectUrl>
+    <repository type="git" url="https://github.com/mkokabi/apiMocker" />
+    <icon>images\icon.png</icon>
+    <description>$description$</description>
+    <copyright>Copyright 2020</copyright>
+    <tags>API test</tags>
+    <dependencies>
+      <group targetFramework="netcoreapp3.1">
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="icon.png" target="images\" />
+  </files>
+</package>

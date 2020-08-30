@@ -45,12 +45,12 @@ If we have more than one APIDetail they should be ordered based on more specific
 ```
 
 Then the APIMocker needs to be executed.
-![Running the API mocker](https://github.com/mkokabi/pe-nation/blob/master/images/Running%20the%20APIMocker.png?raw=true)
+![Running the API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/Running%20the%20APIMocker.png?raw=true)
 
 It's how it looks:
 MockAPI Welcome page
-![API mocker](https://github.com/mkokabi/pe-nation/blob/master/images/MockAPI%20Welcome%20page.png?raw=true)
-![API mocker](https://github.com/mkokabi/pe-nation/blob/master/images/APIMocker%20at%20work.png?raw=true)
+![API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/MockAPI%20Welcome%20page.png?raw=true)
+![API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/APIMocker%20at%20work.png?raw=true)
 
 If we want to set on a port we can just pass:
 ```
@@ -90,8 +90,8 @@ if (response.IsSuccessStatusCode)
 
 ```
 Then we can run the API application
-![Running the API consumer](https://github.com/mkokabi/pe-nation/blob/master/images/Running%20the%20API%20consumer.png?raw=true)
+![Running the API consumer](https://github.com/mkokabi/apiMocker/blob/master/images/Running%20the%20API%20consumer.png?raw=true)
 
 It's how it looks:
-![API Consumer](https://github.com/mkokabi/pe-nation/blob/master/images/API%20application%20consuming%20the%20Mock.png?raw=true)
+![API Consumer](https://github.com/mkokabi/apiMocker/blob/master/images/API%20application%20consuming%20the%20Mock.png?raw=true)
 
