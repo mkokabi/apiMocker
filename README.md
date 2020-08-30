@@ -1,10 +1,6 @@
-# PE-Nation assessment
-This assessment includes 2 parts:
-- The APIMocker: A simple application which based on the configuration defined in its AppSettings simulates an API
-- The PENation.API: An API application which connects to an external API. In this configuration it's connecting to the mocked API.
 
-## The APIMocker 
-### configuration
+# The APIMocker 
+## configuration
 The configuration is only one tag *APIDetail* which contains following elements:
 - Path
 - QueryString
@@ -29,7 +25,7 @@ The QueryString can be even replaced with
 ```
 to support other values of customerNo.
 
-### multiple API
+## multiple API
 If we have more than one APIDetail they should be ordered based on more specific first.
 ```json
   "APIDetail": [
@@ -56,8 +52,17 @@ MockAPI Welcome page
 ![API mocker](https://github.com/mkokabi/pe-nation/blob/master/images/MockAPI%20Welcome%20page.png?raw=true)
 ![API mocker](https://github.com/mkokabi/pe-nation/blob/master/images/APIMocker%20at%20work.png?raw=true)
 
-## API Consumer
-The Second part is just a simple API application which is going to consume this application. It's an API application itself but can be a Web application or a background service or anything else.
+If we want to set on a port we can just pass:
+```
+dotnet run --urls "http://localhost:5600"
+```
+or
+```
+dotnet run --urls "http://localhost:5600;https://localhost:5601"
+```
+
+# API Consumer
+An API application is included which is going to consume the Mock API. While this consumer is an API application itself but can be a Web application or a background service or anything else.
 
 In it's configuration it has the URL which is currently pointint to the mock application
 ``` json
