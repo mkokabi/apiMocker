@@ -5,6 +5,8 @@
     <OutputType>Exe</OutputType>
     <PublishTrimmed>true</PublishTrimmed>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishSingleFile>true</PublishSingleFile>
+
     <Title>APIMocker</Title>
     <PackageId>APIMocker</PackageId>
     <Version>1.2.0</Version>
@@ -19,11 +21,29 @@
     For more help please visit https://github.com/mkokabi/apiMocker
     </Description>
   </PropertyGroup>
+  <Choose>
+    <When Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+      <PropertyGroup>
+        <RuntimeIdentifier>osx-x64</RuntimeIdentifier>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+    </Otherwise>
+  </Choose>
+
   <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath=""/>
-    <None Include="Exec\APIMocker.exe" Pack="true" PackagePath="Exec"/>
+    <None Include="Exec\APIMocker.exe" Pack="true" PackagePath="Exec" Condition="$([MSBuild]::IsOSPlatform('Windows'))"/>
   </ItemGroup>
-  <Target Name="CopyExeOnBuild" AfterTargets="AfterBuild">
-    <Copy SourceFiles="bin\Debug\netcoreapp3.1\APIMocker.exe" DestinationFolder="Exec" />
+  <Target Name="CopyWinExeOnBuild" AfterTargets="AfterBuild" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\APIMocker.exe" DestinationFolder="WindowsExec" />
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\appsettings.json" DestinationFolder="WindowsExec" />
+  </Target>
+  <Target Name="PublishOnMac" AfterTargets="AfterPublish" Condition="$([MSBuild]::IsOSPlatform('OSX')) And !Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
+    <Exec Command="dotnet publish -r osx-x64 --self-contained true /p:PublishTrimmed=true /p:PublishSingleFile=true" ContinueOnError="false"/>
+  </Target>
+  <Target Name="CopyMacExeOnBuild" AfterTargets="AfterPublish" Condition="$([MSBuild]::IsOSPlatform('OSX')) And Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\osx-x64\publish\APIMocker" DestinationFolder="MacOSExec" />
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\osx-x64\publish\appsettings.json" DestinationFolder="MacOSExec" />
   </Target>
 </Project>
