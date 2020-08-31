@@ -3,6 +3,7 @@
 ## configuration
 The configuration is only one tag *APIDetail* which contains following elements:
 - Path
+- Method (optional default Get)
 - QueryString
 - StatusCode
 - ResponseBody

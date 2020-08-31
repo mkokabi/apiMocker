@@ -47,19 +47,17 @@ namespace APIMocker
         var request = context.HttpContext.Request;
         var path = request.Path.Value;
         var queryString = request.QueryString.Value;
+        var method = request.Method;
         var response = context.HttpContext.Response;
         var match = APIDetailOptions.FirstOrDefault(opt =>
                   path.Equals(opt.Path, StringComparison.OrdinalIgnoreCase) &&
-                  QueryStringChecker.Match(opt.QueryString, queryString));
+                  QueryStringChecker.Match(opt.QueryString, queryString) && 
+                  string.Equals(opt.Method, method, StringComparison.InvariantCultureIgnoreCase));
         if (match != null)
         {
           response.StatusCode = match.StatusCode;
           var stream = response.Body;
           await stream.WriteAsync(Encoding.UTF8.GetBytes(match.ResponseBody));
-        }
-        else
-        {
-          await WriteWelcomePage(response, request);
         }
       });
 
@@ -77,6 +75,9 @@ namespace APIMocker
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.MapGet("/", async context => {
+          await WriteWelcomePage(context.Response, context.Request);
+        });
       });
     }
 
@@ -87,9 +88,9 @@ namespace APIMocker
       sb.Append("<p style='color: green'>running</p>");
       sb.Append("<br><p>registered API mocks:</p>");
       sb.Append("<style>table {border-collapse: collapse;} td, th { border: 1px solid black; }</style>");
-      sb.Append("<table><tr><th>Path</th><th>Query string</th><th></th></tr>");
+      sb.Append("<table><tr><th>Path</th><th>Query string</th><th>method</th><th></th></tr>");
       APIDetailOptions.ForEach(opt => 
-        sb.Append($@"<tr><td>{opt.Path}</td><td>{opt.QueryString}</td>
+        sb.Append($@"<tr><td>{opt.Path}</td><td>{opt.QueryString}</td><td>{opt.Method.ToUpper()}</td>
         <td><a target='_blank' href='{
           (request.IsHttps ? "https" : "http")}://{request.Host}{opt.Path}{opt.QueryString}'>test</a></td></tr>"));
       sb.Append("</table>");

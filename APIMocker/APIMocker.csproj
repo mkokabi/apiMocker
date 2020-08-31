@@ -7,8 +7,8 @@
     <PublishReadyToRun>true</PublishReadyToRun>
     <Title>APIMocker</Title>
     <PackageId>APIMocker</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>Mohsen Kokabi </Authors>
+    <Version>1.1.0</Version>
+    <Authors>Mohsen Kokabi</Authors>
     <owners>Mohsen Kokabi</owners>
     <Company>MoKo Solution</Company>
     <IsPackable>true</IsPackable>
