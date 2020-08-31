@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
     <Title>APIMocker</Title>
     <PackageId>APIMocker</PackageId>
     <Version>1.0.0</Version>
@@ -16,5 +19,11 @@
     For more help please visit https://github.com/mkokabi/apiMocker
     </Description>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath=""/>
+    <None Include="Exec\APIMocker.exe" Pack="true" PackagePath="Exec"/>
+  </ItemGroup>
+  <Target Name="CopyExeOnBuild" AfterTargets="AfterBuild">
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\APIMocker.exe" DestinationFolder="Exec" />
+  </Target>
 </Project>

@@ -18,8 +18,11 @@
       <group targetFramework="netcoreapp3.1">
       </group>
     </dependencies>
+    <contentFiles>
+      <files include="Exec\APIMocker.exe" buildAction="None" />
+    </contentFiles>
   </metadata>
   <files>
-    <file src="icon.png" target="images\" />
+    <file src="Exec\APIMocker.exe" target="Exe\" />
   </files>
 </package>
