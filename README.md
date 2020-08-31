@@ -41,6 +41,13 @@ If we have more than one APIDetail they should be ordered based on more specific
       "QueryString": "?customerNo={0}",
       "StatusCode": 200,
       "ResponseBody": "[{\"orderNumber\":\"23\",\"orderDate\":\"2020-07-01T06:57:53.917141+10:00\",\"orderStatus\":\"Order\"},{\"orderNumber\":\"10\",\"orderDate\":\"2020-07-14T06:57:53.917435+10:00\",\"orderStatus\":\"Order\"},{\"orderNumber\":\"7\",\"orderDate\":\"2020-07-08T06:57:53.917443+10:00\",\"orderStatus\":\"Order\"},{\"orderNumber\":\"-9\",\"orderDate\":\"2020-07-14T06:57:53.917444+10:00\",\"orderStatus\":\"Order\"},{\"orderNumber\":\"9\",\"orderDate\":\"2020-06-27T06:57:53.917468+10:00\",\"orderStatus\":\"Order\"}]"
+    },
+    {
+      "Path": "/v1/Order",
+      "Method": "post",
+      "QueryString": "?customerNo={0}",
+      "StatusCode": 200,
+      "ResponseBody": "OK"
     }
   ],
 ```
