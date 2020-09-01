@@ -5,9 +5,10 @@ This application can be used to Mock an API based on the *appsettings* configura
 The configuration is only one tag *APIDetail* which contains following elements:
 - Path
 - Method (optional default Get)
-- QueryString
+- QueryString (optional default "")
 - StatusCode
 - ResponseBody
+- ResponseHeaders (optional default no extra header)
 
 To create an API serving /order?customerNo=12345 we need to configure as:
 
@@ -68,6 +69,19 @@ dotnet run --urls "http://localhost:5600"
 or
 ```
 dotnet run --urls "http://localhost:5600;https://localhost:5601"
+```
+
+## Adding headers to the response
+The response can have headers:
+```json
+    {
+      "Path": "/v1/Auth",
+      "Method": "post",
+      "StatusCode": 401,
+      "ResponseBody": "OK",
+      "ResponseHeaders": 
+        {"WWW-Authenticate": "Basic"}
+    }
 ```
 
 # API Consumer

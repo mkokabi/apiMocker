@@ -57,6 +57,11 @@ namespace APIMocker
         {
           response.StatusCode = match.StatusCode;
           var stream = response.Body;
+          if (match.ResponseHeaders != null && response.Headers != null)
+          {
+            match.ResponseHeaders.Where(rh => rh.Key != null && rh.Value != null).ToList().ForEach(resHeader => 
+              response.Headers.Add(resHeader.Key, resHeader.Value));
+          }
           await stream.WriteAsync(Encoding.UTF8.GetBytes(match.ResponseBody));
         }
       });

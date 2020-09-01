@@ -9,7 +9,7 @@
 
     <Title>APIMocker</Title>
     <PackageId>APIMocker</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>Mohsen Kokabi</Authors>
     <owners>Mohsen Kokabi</owners>
     <Company>MoKo Solution</Company>
@@ -33,19 +33,22 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-
   <ItemGroup>
+    <None Include="appsettings.json" CopyToOutputDirectory="Always" />
     <None Include="icon.png" Pack="true" PackagePath=""/>
     <None Include="Exec\APIMocker.exe" Pack="true" PackagePath="Exec" Condition="$([MSBuild]::IsOSPlatform('Windows'))"/>
   </ItemGroup>
-  <Target Name="CopyWinExeOnBuild" AfterTargets="AfterBuild" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+  <Target Name="CopyWinExeOnBuild" AfterTargets="AfterPublish" 
+    Condition="$([MSBuild]::IsOSPlatform('Windows')) And Exists('bin\Debug\netcoreapp3.1')">
     <Copy SourceFiles="bin\Debug\netcoreapp3.1\APIMocker.exe" DestinationFolder="WindowsExec" />
     <Copy SourceFiles="bin\Debug\netcoreapp3.1\appsettings.json" DestinationFolder="WindowsExec" />
   </Target>
-  <Target Name="PublishOnMac" AfterTargets="AfterPublish" Condition="$([MSBuild]::IsOSPlatform('OSX')) And !Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
+  <Target Name="PublishOnMac" AfterTargets="AfterPublish" 
+    Condition="$([MSBuild]::IsOSPlatform('OSX')) And !Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
     <Exec Command="dotnet publish -r osx-x64 --self-contained true /p:PublishTrimmed=true /p:PublishSingleFile=true" ContinueOnError="false"/>
   </Target>
-  <Target Name="CopyMacExeOnBuild" AfterTargets="AfterPublish" Condition="$([MSBuild]::IsOSPlatform('OSX')) And Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
+  <Target Name="CopyMacExeOnBuild" AfterTargets="AfterPublish" 
+    Condition="$([MSBuild]::IsOSPlatform('OSX')) And Exists('bin\Debug\netcoreapp3.1\osx-x64\publish')">
     <Copy SourceFiles="bin\Debug\netcoreapp3.1\osx-x64\publish\APIMocker" DestinationFolder="MacOSExec" />
     <Copy SourceFiles="bin\Debug\netcoreapp3.1\osx-x64\publish\appsettings.json" DestinationFolder="MacOSExec" />
   </Target>
