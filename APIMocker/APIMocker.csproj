@@ -28,6 +28,9 @@
       </PropertyGroup>
     </When>
     <Otherwise>
+      <PropertyGroup>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+      </PropertyGroup>
     </Otherwise>
   </Choose>
 

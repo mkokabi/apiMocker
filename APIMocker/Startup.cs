@@ -84,7 +84,7 @@ namespace APIMocker
     private async Task WriteWelcomePage(HttpResponse response, HttpRequest request)
     {
       response.ContentType = "text/html";
-      var sb = new StringBuilder("<h2>MockApi</h2>");
+      var sb = new StringBuilder($"<span style='display: inline-flex;align-items: baseline;'><h2>MockApi</h2>--<h4>{this.GetType().Assembly.GetName().Version}</h4></span>");
       var url = $"{(request.IsHttps ? "https" : "http")}://{request.Host}";
       sb.Append($@"<script>
       function callPost(path, queryString, method) {{
