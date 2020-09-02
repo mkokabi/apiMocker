@@ -45,8 +45,8 @@
   </ItemGroup>
   <Target Name="CopyWinExeOnBuild" AfterTargets="AfterPublish" 
     Condition="$([MSBuild]::IsOSPlatform('Windows')) And Exists('bin\Debug\netcoreapp3.1')">
-    <Copy SourceFiles="bin\Debug\netcoreapp3.1\APIMocker.exe" DestinationFolder="WindowsExec" />
-    <Copy SourceFiles="bin\Debug\netcoreapp3.1\appsettings.json" DestinationFolder="WindowsExec" />
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\win-x64\publish\APIMocker.exe" DestinationFolder="WindowsExec" />
+    <Copy SourceFiles="bin\Debug\netcoreapp3.1\win-x64\publish\appsettings.json" DestinationFolder="WindowsExec" />
     <ZipDirectory
       SourceDirectory="WindowsExec"
       DestinationFile="WindowsExecZip"

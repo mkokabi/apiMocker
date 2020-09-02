@@ -1,3 +1,4 @@
+<img src="https://github.com/mkokabi/apiMocker/blob/master/APIMocker/icon.png?raw=true" alt="Logo" width="100px" height="100px">
 
 # The APIMocker.Net
 This application can be used to Mock an API based on the *appsettings* configuration file. While it can be used by developers it's also made portable so can be easily copied to the build server. The App has been tested on Windows, Mac and Linux.
