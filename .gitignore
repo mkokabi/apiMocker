@@ -403,5 +403,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-APIMocker/MacOSExec/APIMocker
-APIMocker/Exec/APIMocker.exe
+APIMocker/WindowsExec
+APIMocker/MacExec
+APIMocker/LinuxExec
+APIMocker/LinuxExec/APIMocker
