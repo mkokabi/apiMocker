@@ -19,8 +19,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
     - name: Build
       run: dotnet build APIMocker --configuration Release --no-restore
     - name: test
@@ -39,8 +41,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
     - name: Build
       run: dotnet build APIMocker --configuration Release --no-restore
     - name: test
@@ -59,8 +63,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
     - name: Build
       run: dotnet build APIMocker --configuration Release --no-restore
     - name: test
