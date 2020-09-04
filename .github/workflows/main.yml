@@ -34,8 +34,7 @@ jobs:
     - name: Commit adding the ubuntu Executables
       run: |
         git config --local user.email "mkokabi@yahoo.com"
-        git config --local user.name "GitHub Action"
-        git add Executables
+        git config --local user.name "GitHub Action" 
         git commit -m "Adding ubuntu Executables" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
