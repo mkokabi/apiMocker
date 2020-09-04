@@ -2,7 +2,7 @@ name: .NET Core
 
 on:
   push:
-    branches: mkokabi-build_action]
+    branches: [ mkokabi-build_action ]
     paths-ignore: Executables
   pull_request:
     branches: [ mkokabi-build_action]
