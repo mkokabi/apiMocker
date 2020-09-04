@@ -67,6 +67,7 @@ jobs:
       run: |
         git config --local user.email "mkokabi@yahoo.com"
         git config --local user.name "GitHub Action" 
+        git add APIMocker/Executables/
         git commit -m "Adding windows Executables" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -99,6 +100,7 @@ jobs:
       run: |
         git config --local user.email "mkokabi@yahoo.com"
         git config --local user.name "GitHub Action" 
+        git add APIMocker/Executables/
         git commit -m "Adding mac Executables" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
