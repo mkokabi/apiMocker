@@ -9,7 +9,7 @@
 
     <Title>APIMocker</Title>
     <PackageId>APIMocker</PackageId>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Authors>Mohsen Kokabi</Authors>
     <owners>Mohsen Kokabi</owners>
     <Company>MoKo Solution</Company>
@@ -50,6 +50,7 @@
     <ZipDirectory
       SourceDirectory="WindowsExec"
       DestinationFile="WindowsExecZip"
+      Overwrite="true"
     />
   </Target>
   <Target Name="PublishOnMac" AfterTargets="AfterPublish" 
@@ -63,6 +64,7 @@
     <ZipDirectory
       SourceDirectory="MacExec"
       DestinationFile="MacExecZip"
+      Overwrite="true"
     />
   </Target>
   <Target Name="CopyLinuxExeOnBuild" AfterTargets="AfterPublish" 
@@ -72,6 +74,7 @@
     <ZipDirectory
       SourceDirectory="LinuxExec"
       DestinationFile="LinuxExecZip"
+      Overwrite="true"
     />
   </Target>
 </Project>

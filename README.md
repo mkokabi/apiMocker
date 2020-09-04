@@ -5,11 +5,12 @@ This application can be used to Mock an API based on the *appsettings* configura
 ## configuration
 The configuration is only one tag *APIDetail* which contains following elements:
 - Path
-- Method (optional default Get)
-- QueryString (optional default "")
+- Method (optional, default Get)
+- QueryString (optional, default "")
 - StatusCode
 - ResponseBody
-- ResponseHeaders (optional default no extra header)
+- ResponseBodyFile (optional)
+- ResponseHeaders (optional, default no extra header)
 
 To create an API serving /order?customerNo=12345 we need to configure as:
 
@@ -69,6 +70,15 @@ The *Method* parameter could be used to configure the mock APIs other than GET.
 ```
 ![API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/Running%20On%20Linux.png?raw=true)
 
+## Response from external file
+The response body can be in an external file so *ResponseBodyFile* tag should be used instead of *ResponseBody*.
+```json
+    {
+      "Path": "/GetAllOrders",
+      "StatusCode": 200,
+      "ResponseBodyFile" : "responses/responseA.json"
+    },
+```
 
 If we want to set on a port we can just pass:
 ```
