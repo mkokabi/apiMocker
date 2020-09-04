@@ -63,7 +63,17 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
-  
+    - name: Commit adding the windows Executables
+      run: |
+        git config --local user.email "mkokabi@yahoo.com"
+        git config --local user.name "GitHub Action" 
+        git commit -m "Adding windows Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: mkokabi-build_action
+
   buildOnMac:
     name: build on mac
 
@@ -85,3 +95,13 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
+    - name: Commit adding the mac Executables
+      run: |
+        git config --local user.email "mkokabi@yahoo.com"
+        git config --local user.name "GitHub Action" 
+        git commit -m "Adding mac Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: mkokabi-build_action
