@@ -49,7 +49,7 @@
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\win-x64\publish\appsettings.json" DestinationFolder="WindowsExec" />
     <ZipDirectory
       SourceDirectory="WindowsExec"
-      DestinationFile="WindowsExecZip"
+      DestinationFile="Executables\WindowsExecZip"
       Overwrite="true"
     />
   </Target>
@@ -63,7 +63,7 @@
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\osx-x64\publish\appsettings.json" DestinationFolder="MacExec" />
     <ZipDirectory
       SourceDirectory="MacExec"
-      DestinationFile="MacExecZip"
+      DestinationFile="Executables\MacExecZip"
       Overwrite="true"
     />
   </Target>
@@ -73,7 +73,7 @@
     <Copy SourceFiles="bin/$(Configuration)/netcoreapp3.1/linux-x64/publish/appsettings.json" DestinationFolder="LinuxExec" />
     <ZipDirectory
       SourceDirectory="LinuxExec"
-      DestinationFile="LinuxExecZip"
+      DestinationFile="Executables/LinuxExecZip"
       Overwrite="true"
     />
   </Target>

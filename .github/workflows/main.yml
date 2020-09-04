@@ -2,9 +2,11 @@ name: .NET Core
 
 on:
   push:
-    branches: [ mkokabi-build_action]
+    branches: mkokabi-build_action]
+    paths-ignore: Executables
   pull_request:
     branches: [ mkokabi-build_action]
+    paths-ignore: Executables
 
 jobs:
 
@@ -29,6 +31,15 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
+    - name: Commit adding the ubuntu Executables
+      run: |
+        git config --local user.email "mkokabi@yahoo.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Adding ubuntu Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
 
   buildOnWindows:
     name: build on windows
