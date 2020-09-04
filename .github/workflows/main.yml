@@ -2,9 +2,9 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master ]
+    branches: [ mkokabi-build_action]
   pull_request:
-    branches: [ master ]
+    branches: [ mkokabi-build_action]
 
 jobs:
 
