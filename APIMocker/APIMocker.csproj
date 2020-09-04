@@ -47,6 +47,8 @@
     Condition="$([MSBuild]::IsOSPlatform('Windows')) And Exists('bin\$(Configuration)\netcoreapp3.1')">
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\win-x64\publish\APIMocker.exe" DestinationFolder="WindowsExec" />
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\win-x64\publish\appsettings.json" DestinationFolder="WindowsExec" />
+    <MakeDir
+      Directories="Executables"/>
     <ZipDirectory
       SourceDirectory="WindowsExec"
       DestinationFile="Executables\WindowsExecZip"
