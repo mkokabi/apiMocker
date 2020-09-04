@@ -1,0 +1,69 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  buildOnubuntu:
+    name: build on ubuntu
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
+
+  buildOnWindows:
+    name: build on windows
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
+  
+  buildOnMac:
+    name: build on mac
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
