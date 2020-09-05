@@ -31,6 +31,10 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
+    - name: Sleep for 30 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '30s'
     - name: Commit adding the ubuntu Executables
       run: |
         git config --local user.email "mkokabi@yahoo.com"
@@ -64,6 +68,10 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
+    - name: Sleep for 60 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '60s'
     - name: Commit adding the windows Executables - git config email
       run: git config --local user.email "mkokabi@yahoo.com"
     - name: Commit adding the windows Executables - git config name
