@@ -71,6 +71,8 @@ jobs:
       run: git config --local user.name "GitHub Action" 
     - name: git pull
       run: git pull
+    - name: git add
+      run: git add APIMocker/Executables/WindowsExecZip
     - name: git commit
       run: git commit -m "Adding windows Executables" -a
     - name: Push changes
