@@ -1,0 +1,114 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore: Executables
+  pull_request:
+    branches: [ master ]
+    paths-ignore: Executables
+
+jobs:
+
+  buildOnubuntu:
+    name: build on ubuntu
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
+    - name: Commit adding the ubuntu Executables
+      run: |
+        git config --local user.email "mkokabi@yahoo.com"
+        git config --local user.name "GitHub Action" 
+        git pull
+        git commit -m "Adding ubuntu Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: mkokabi-build_action
+
+  buildOnWindows:
+    name: build on windows
+
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
+    - name: Commit adding the windows Executables - git config email
+      run: git config --local user.email "mkokabi@yahoo.com"
+    - name: Commit adding the windows Executables - git config name
+      run: git config --local user.name "GitHub Action" 
+    - name: git pull
+      run: git pull
+    - name: git add
+      run: git add APIMocker/Executables/WindowsExecZip
+    - name: git commit
+      run: git commit -m "Adding windows Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: mkokabi-build_action
+
+  buildOnMac:
+    name: build on mac
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install APIMocker dependencies
+      run: dotnet restore APIMocker
+    - name: Install APIMocker.Tests dependencies
+      run: dotnet restore APIMocker.Tests
+    - name: Build
+      run: dotnet build APIMocker --configuration Release --no-restore
+    - name: test
+      run: dotnet test APIMocker.Tests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish APIMocker --configuration Release 
+    - name: Commit adding the mac Executables
+      run: |
+        git config --local user.email "mkokabi@yahoo.com"
+        git config --local user.name "GitHub Action" 
+        git pull
+        git add APIMocker/Executables/
+        git commit -m "Adding mac Executables" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: mkokabi-build_action

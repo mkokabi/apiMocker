@@ -47,9 +47,11 @@
     Condition="$([MSBuild]::IsOSPlatform('Windows')) And Exists('bin\$(Configuration)\netcoreapp3.1')">
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\win-x64\publish\APIMocker.exe" DestinationFolder="WindowsExec" />
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\win-x64\publish\appsettings.json" DestinationFolder="WindowsExec" />
+    <MakeDir
+      Directories="Executables"/>
     <ZipDirectory
       SourceDirectory="WindowsExec"
-      DestinationFile="WindowsExecZip"
+      DestinationFile="Executables\WindowsExecZip"
       Overwrite="true"
     />
   </Target>
@@ -61,9 +63,11 @@
     Condition="$([MSBuild]::IsOSPlatform('OSX')) And Exists('bin\$(Configuration)\netcoreapp3.1\osx-x64\publish')">
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\osx-x64\publish\APIMocker" DestinationFolder="MacExec" />
     <Copy SourceFiles="bin\$(Configuration)\netcoreapp3.1\osx-x64\publish\appsettings.json" DestinationFolder="MacExec" />
+    <MakeDir
+      Directories="Executables"/>
     <ZipDirectory
       SourceDirectory="MacExec"
-      DestinationFile="MacExecZip"
+      DestinationFile="Executables\MacExecZip"
       Overwrite="true"
     />
   </Target>
@@ -71,9 +75,11 @@
     Condition="$([MSBuild]::IsOSPlatform('Linux')) And Exists('bin/$(Configuration)/netcoreapp3.1/linux-x64/publish')">
     <Copy SourceFiles="bin/$(Configuration)/netcoreapp3.1/linux-x64/publish/APIMocker" DestinationFolder="LinuxExec" />
     <Copy SourceFiles="bin/$(Configuration)/netcoreapp3.1/linux-x64/publish/appsettings.json" DestinationFolder="LinuxExec" />
+    <MakeDir
+      Directories="Executables"/>
     <ZipDirectory
       SourceDirectory="LinuxExec"
-      DestinationFile="LinuxExecZip"
+      DestinationFile="Executables/LinuxExecZip"
       Overwrite="true"
     />
   </Target>
