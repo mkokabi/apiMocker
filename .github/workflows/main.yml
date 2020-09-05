@@ -65,12 +65,14 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
-    - name: Commit adding the windows Executables
-      run: |
-        git config --local user.email "mkokabi@yahoo.com"
-        git config --local user.name "GitHub Action" 
-        git pull
-        git commit -m "Adding windows Executables" -a
+    - name: Commit adding the windows Executables - git config email
+      run: git config --local user.email "mkokabi@yahoo.com"
+    - name: Commit adding the windows Executables - git config name
+      run: git config --local user.name "GitHub Action" 
+    - name: git pull
+      run: git pull
+    - name: git commit
+      run: git commit -m "Adding windows Executables" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
