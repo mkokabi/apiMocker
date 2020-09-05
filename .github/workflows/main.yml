@@ -41,7 +41,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.PAT }}
-        branch: mkokabi-build_action
+        branch: master
 
   buildOnWindows:
     name: build on windows
@@ -77,7 +77,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.PAT }}
-        branch: mkokabi-build_action
+        branch: master
 
   buildOnMac:
     name: build on mac
@@ -111,4 +111,4 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.PAT }}
-        branch: mkokabi-build_action
+        branch: master
