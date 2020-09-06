@@ -31,10 +31,6 @@ jobs:
       run: dotnet test APIMocker.Tests --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish APIMocker --configuration Release 
-    - name: Sleep for 30 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
     - name: Commit adding the ubuntu Executables
       run: |
         git config --local user.email "mkokabi@yahoo.com"
@@ -50,6 +46,7 @@ jobs:
 
   buildOnWindows:
     name: build on windows
+    needs: buildOnubuntu
 
     runs-on: windows-latest
     steps:
@@ -86,6 +83,7 @@ jobs:
 
   buildOnMac:
     name: build on mac
+    needs: buildOnWindows
 
     runs-on: macos-latest
 
