@@ -3,10 +3,14 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
-    paths-ignore: Executables
+    paths-ignore: 
+      - Executables
+      - README.md
   pull_request:
     branches: [ master ]
-    paths-ignore: Executables
+    paths-ignore: 
+      - Executables
+      - README.md
 
 jobs:
 
