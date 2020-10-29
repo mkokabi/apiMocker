@@ -1,36 +1,69 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace APIMocker
 {
   public static class ApiMocker
   {
+    public class Macro 
+    {
+      public string RegexStr { get; set; }
+      public string RegexHeaderStr { get; set; }
+      public Func<string[], string> Run { get; set; }
+    }
+
+    private static Random random = new Random();
+
+    private static Macro[] macros = {
+      new Macro {
+        RegexStr = @"\{\s*Random\s*\(\s*(?:[0-9]*|[0-9]\s*\,\s*[0-9]*)\s*\)\s*}",
+        RegexHeaderStr = @"\{\s*Random\s*\(",
+        Run = numbers => (numbers.Length == 2 && int.TryParse(numbers[0], out int minValue)
+            && int.TryParse(numbers[1], out int maxValue) && (minValue < maxValue)) ? 
+              random.Next(minValue, maxValue).ToString() :
+              (
+                (numbers.Length == 1 && int.TryParse(numbers[0], out maxValue)) ? 
+                random.Next(maxValue).ToString() : random.Next().ToString()
+              )
+      },
+      new Macro {
+        RegexStr = @"\{\s*DateTime\s*\(\s*.*\s*\)\s*}",
+        RegexHeaderStr = @"\{\s*DateTime\s*\(",
+        Run = format => format.Length == 1 ?
+          DateTime.Now.ToString(format[0]) :
+          DateTime.Now.ToString()
+      }
+    };
+
     public static string Replace(string responseBodyString, List<Replace> replaces)
     {
-      const string randomRegex = @"\{\s*Random\s*\(\s*(?:[0-9]*|[0-9]\s*\,\s*[0-9]*)\s*\)\s*}";
-      const string randomHeadRegex = @"\{\s*Random\s*\(";
-      char[] randomTailChars = {' ', ')', '}'};
       const RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace;
-      var random = new Random();
+      char[] randomTailChars = {' ', ')', '}'};
+
       foreach (var replace in replaces)
       {
-        var replaceWith = replace.Replacement;
-        if (Regex.Match(replace.Replacement, randomRegex, regexOptions).Success)
+        if (!replace.Replacement.Contains("{"))
         {
-          var numbersPart = Regex.Replace(replace.Replacement, randomHeadRegex, "").TrimEnd(randomTailChars);
-          var numbers = numbersPart.Split(',', StringSplitOptions.RemoveEmptyEntries);
-          
-          replaceWith = (numbers.Length == 2 && int.TryParse(numbers[0], out int minValue)
-          && int.TryParse(numbers[1], out int maxValue) && (minValue < maxValue)) ? 
-            random.Next(minValue, maxValue).ToString() :
-            (
-              (numbers.Length == 1 && int.TryParse(numbers[0], out maxValue)) ? 
-              random.Next(maxValue).ToString() : random.Next().ToString()
-            );
+          responseBodyString = Regex.Replace(responseBodyString, replace.Pattern, replace.Replacement);
+          continue;
         }
+        var macro = macros.FirstOrDefault(m => Regex.IsMatch(replace.Replacement, m.RegexStr, regexOptions));
+        if (macro != null)
+        {
+          var randomRegex = macro.RegexStr;
+          var replaceWith = replace.Replacement;
+          if (Regex.IsMatch(replace.Replacement, randomRegex, regexOptions))
+          {
+            var numbersPart = Regex.Replace(replace.Replacement, macro.RegexHeaderStr, "").TrimEnd(randomTailChars);
+            var numbers = numbersPart.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            replaceWith = macro.Run(numbers);
+          }
         responseBodyString = Regex.Replace(responseBodyString, replace.Pattern, replaceWith);
+        }
       }
+      
       return responseBodyString;
     }
   }
