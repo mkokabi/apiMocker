@@ -59,6 +59,31 @@ MockAPI Welcome page
 ![API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/MockAPI%20Welcome%20page.png?raw=true)
 ![API mocker](https://github.com/mkokabi/apiMocker/blob/master/images/APIMocker%20at%20work.png?raw=true)
 
+## Macros / Replacement
+The response can be manipulated using Replaces element
+```json
+      "Replaces": [
+        {
+          "Pattern": "\"[0-9]*\"",
+          "Replacement": "\"100\""
+        }
+      ]
+```
+In above example the numbers between "" would be replaced with "100". While static replace might not look very useful *Macros* can help to control the response. Currently, there are 2 macros:
+### Random
+It would be used in the *Replacement* element of Replace
+```json
+"Replacement": "{Random(10)}"
+```
+It can accept none, one or two parameters.
+
+### DateTime
+It would be used in the *Replacement* element of Replace
+```json
+"Replacement": "{DateTime(yy-MM-dd hh:mm:ss)}"
+```
+The format parameter is optiona.
+
 ## Post
 The *Method* parameter could be used to configure the mock APIs other than GET.
 ```json
