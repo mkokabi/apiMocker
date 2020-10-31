@@ -69,20 +69,30 @@ The response can be manipulated using Replaces element
         }
       ]
 ```
-In above example the numbers between "" would be replaced with "100". While static replace might not look very useful *Macros* can help to control the response. Currently, there are 2 macros:
+In above example the numbers between "" would be replaced with "100". While static replace might not look very useful *Macros* can help to control the response. Currently, there are following macros:
 ### Random
-It would be used in the *Replacement* element of Replace
+It would be used in the *Replacement* element of Replace and every time it generates a new number
 ```json
 "Replacement": "{Random(10)}"
 ```
-It can accept none, one or two parameters.
+It can accept none, one (as max) or two parameters as min and max.
 
 ### DateTime
-It would be used in the *Replacement* element of Replace
+It would be used in the *Replacement* element of Replace to return the current date and time.
 ```json
 "Replacement": "{DateTime(yy-MM-dd hh:mm:ss)}"
 ```
-The format parameter is optiona.
+The format parameter is optional. The format string doesn't need " or '.
+
+### Sequence
+It would be used in the *Replacement* element of Replace and everytime it would give the next number.
+```json
+"Replacement": "{Sequence()}"
+```
+or 
+```json
+"Replacement": "{Sequence(key1)}"
+```
 
 ## Post
 The *Method* parameter could be used to configure the mock APIs other than GET.
